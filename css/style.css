@@ -1,0 +1,179 @@
+/* ============================================
+   TASK 5 — MUBAS Pricing Table (Flexbox)
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f5f7;
+  margin: 0;
+  color: #222;
+}
+
+.pricing-section {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.pricing-section h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-intro {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* ── pricing-table is the FLEX CONTAINER ── */
+.pricing-table {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;      /* make all cards the same height */
+  justify-content: center;
+  flex-wrap: wrap;           /* allows cards to wrap/stack on narrow screens */
+  padding: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Each .plan is a FLEX ITEM, and also its own flex container ── */
+.plan {
+  flex: 1 1 280px;           /* grow, shrink, min basis 280px */
+  max-width: 340px;
+
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+
+  display: flex;              /* plans are ALSO flex containers */
+  flex-direction: column;     /* stack content vertically */
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.plan h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #1a1a2e;
+}
+
+.price {
+  font-size: 1rem;
+  color: #555;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+.price .amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  flex-grow: 1;               /* pushes button area down evenly */
+}
+
+.plan ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.plan ul li::before {
+  content: "✓ ";
+  color: #2e8b57;
+  font-weight: bold;
+}
+
+/* Push the button to the bottom of each card, regardless of content length */
+.btn {
+  margin-top: auto;
+  display: block;
+  text-align: center;
+  background: #1a1a2e;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #0f0f1a;
+}
+
+/* ── Highlighted middle plan ── */
+.plan.featured {
+  position: relative;
+  background: #1a1a2e;
+  color: #ffffff;
+  border: none;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.plan.featured h3,
+.plan.featured .price,
+.plan.featured .amount {
+  color: #ffffff;
+}
+
+.plan.featured ul li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.plan.featured .btn {
+  background: #ffd700;
+  color: #1a1a2e;
+}
+
+.plan.featured .btn:hover {
+  background: #e6c200;
+}
+
+.badge {
+  position: absolute;
+  top: -14px;
+  right: 20px;
+  background: #ffd700;
+  color: #1a1a2e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================
+   RESPONSIVE — mobile-first
+   Below 700px: single column, no scale/elevation
+   ============================================ */
+@media (max-width: 699px) {
+  .pricing-table {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .plan {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .plan.featured {
+    transform: none;   /* don't scale up on mobile — full width stack instead */
+    order: -1;          /* optional: show featured plan first on mobile */
+  }
+}
